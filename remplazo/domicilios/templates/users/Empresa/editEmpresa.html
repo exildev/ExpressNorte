@@ -1,0 +1,86 @@
+{% extends "users/base_user.html" %}
+{% block title %}Editar Empresa{% endblock %}
+{% block content_user %}
+<div class="one column row">
+	<div class="column">
+		<div class="ui labeled huge input">
+          <a href="{% url 'domicilios:empresa_search' %}" class="ui teal icon huge button">
+            <i class="express-atras icon"></i>
+          </a>
+          <a class="ui olive label">Editar Empresa</a>
+        </div>
+	</div>
+    {% if mensaje %}
+      <div class="ui center aligned container column">
+        <div class="ui {{ mensaje.tipo }} message">
+          <div class=" content">
+            <div class="header">
+              {{ mensaje.texto }}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+</div>
+<div class="ui container grid" style="margin-bottom:50px;">
+  <div class="center aligned column">
+		<form method="POST" class="ui form" enctype="multipart/form-data">
+			{% csrf_token %}
+			<h2 class="ui teal header">&nbsp;</h2>
+	    <div class="four fields">
+        <div class="field {% if form.first_name.errors %}error{% endif %}">
+	        {{ form.first_name }}
+	      </div>
+	      <div class="field {% if form.nit.errors %}error{% endif %}">
+	        {{ form.nit }}
+	      </div>
+        <div class="field {% if form.logo.errors %}error{% endif %}">
+					<div class="ui action {% if form.logo.errors %}error field{% endif %} input btn-file">
+					  <input id="target" placeholder="Search..." readonly="" type="text" value="{{ empresa.logo }}">
+					  <label for="id_logo" class="ui olive icon button">
+					    <i class="cloud upload icon"></i>
+					  </label>
+					</div>
+					{{ form.logo }}
+				</div>
+				<div class="field {% if form.web.errors %}error{% endif %}">
+					{{ form.web }}
+				</div>
+	    </div>
+
+			<h2 class="ui teal header"></h2>
+			<div class="three fields">
+        <div class="field {% if form.direccion.errors %}error{% endif %}">
+	        {{ form.direccion }}
+	      </div>
+	      <div class="field {% if form.ciudad.errors %}error{% endif %}">
+	        {{ form.ciudad }}
+	      </div>
+        <div class="field {% if form.username.errors %}error{% endif %}">
+	        {{ form.username }}
+	      </div>
+				
+	    </div>
+
+			<button type="submit" class="ui olive fluid large button">Actualizar</button>
+
+		</form>
+  </div>
+</div>
+{% endblock %}
+
+{% block addjs %}
+<script type="text/javascript">
+  $(function() {
+       $("input:file").change(function (){
+         var fileName = $(this).val();
+         $("#target").val(fileName);
+       });
+    });
+</script>
+<script type="text/javascript">
+$( document ).ready(function() {
+	$('.ui.dropdown').dropdown();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "users/base_user.html" %}
+{% block title %}Inicio{% endblock %}
+{% block addcss_user %}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style_index.css">{% endblock %}
+{% block content_user %}
+  <div class="one middle aligned column row">
+    <div class="center aligned  column">
+      {% if mensaje %}
+        <p>{{mensaje}}</p>
+      {% endif %}
+      {% if request.session.cargo == 'ADMINISTRADOR' or request.session.cargo == 'SUPERVISOR'%}
+      <div class="ui vertical compact labeled icon inverted huge teal menu">
+        <a href="{% url 'domicilios:index_cliente' %}" class="item">
+          <h3><i class="express-clientes huge icon"></i></h3>
+          Clientes
+        </a>
+      </div>
+      {% endif %}
+      {% if request.session.cargo == 'ADMINISTRADOR' or request.session.cargo == 'SUPERVISOR'%}
+      <div class="ui vertical compact labeled icon inverted teal huge menu">
+        <a href="{% url 'domicilios:index_motorizado' %}"class="item">
+          <h3><i class="express-motos huge icon"></i></h3>
+          Motos
+        </a>
+      </div>
+      {% endif %}
+      {% if request.session.cargo == 'ADMINISTRADOR' %}
+      <div class="ui vertical compact labeled icon inverted teal huge menu">
+        <a href="{% url 'domicilios:index_empleado' %}" class="item">
+          <h3><i class="express-empleados huge icon"></i></h3>
+          Empleados
+        </a>
+      </div>
+      {% endif %}
+      {% if request.session.cargo == 'ADMINISTRADOR' %}
+      <div class="ui vertical compact labeled icon inverted teal huge menu">
+        <a href="{% url 'domicilios:index_empresa' %}" class="item">
+          <h3><i class="express-empresas huge icon"></i></h3>
+          Empresas
+        </a>
+      </div>
+      {% endif %}
+      {% if request.session.cargo == 'SUPERVISOR' or request.session.cargo == 'ADMINISTRADOR' %}
+      <div class="ui vertical compact labeled icon inverted teal huge menu">
+        <a href="{% url 'domicilios:index_pedido' %}" class="item">
+          <h3><i class="cart huge icon"></i></h3>
+          Pedidos
+        </a>
+      </div>
+      {% endif %}
+      {% if request.session.cargo == 'ALISTADOR' or request.session.cargo == 'MOTORIZADO'  %}
+      <div class="ui vertical compact labeled icon inverted teal huge menu">
+      <a href="{% url 'domicilios:mis_pedidos' %}"class="item">
+        <h3><i class="ticket huge icon"></i></h3>
+        Mis Pedidos
+      </a>
+    </div>
+      {% endif %}
+      {% if request.session.cargo == 'ALISTADOR' %}
+      <div class="ui vertical compact labeled icon inverted teal huge menu">
+        <a href="{% url 'domicilios:asignar' %}" class="item">
+          <h3><i class="location arrow huge icon"></i></h3>
+          Asignar Pedidos
+        </a>
+      </div>
+      {% endif %}
+      {% if request.session.cargo == 'MOTORIZADO' %}
+      <div class="ui vertical compact labeled icon inverted teal huge menu">
+        <a href="{% url 'domicilios:pedido_certificado' %}" class="item">
+          <h3><i class="checkmark box huge icon"></i></h3>
+          Certificar Pedidos
+        </a>
+      </div>
+      {% endif %}
+      {% if request.session.cargo == 'SUPERVISOR' or request.session.cargo == 'ADMINISTRADOR' %}
+      <div class="ui vertical compact labeled icon inverted teal huge menu">
+        <a href="{% url 'domicilios:rastreo' %}" class="item">
+          <h3><i class="marker huge icon"></i></h3>
+          Rastreo
+        </a>
+      </div>
+      {% endif %}
+      {% if request.session.cargo == 'SUPERVISOR' or request.session.cargo == 'ADMINISTRADOR' %}
+        <div class="ui vertical compact labeled icon inverted teal huge menu">
+          <a href="{% url 'domicilios:reporte' %}" class="item">
+            <h3><i class="file text outline huge icon"></i></h3>
+            Reporte?
+          </a>
+        </div>
+      {% endif %}
+      
+    </div>
+  </div>
+{% endblock %}

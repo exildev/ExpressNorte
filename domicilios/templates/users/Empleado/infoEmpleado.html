@@ -1,0 +1,116 @@
+{% extends "users/base_user.html" %}
+{% block title %}Informacion del Empleado{% endblock %}
+{% block content_user %}
+<div class="one column row">
+	<div class="column">
+		<div class="ui labeled huge input">
+      <a href="{% url 'domicilios:index' %}" class="ui teal icon huge button">
+        <i class="express-atras icon"></i>
+      </a>
+      <a class="ui olive label">Info Empleado</a>
+    </div>
+	</div>
+</div>	
+<div class="ui container grid" style="margin-bottom:50px;">
+  <div class="center aligned column">
+	  <h2 class="ui olive header">{{ empleado.get_full_name|title }}</h2>
+	  <div class="ui stackable three column grid">
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Username:
+				  <p class="detail">{{ empleado.username }}</p>
+				</div>
+		  </div>
+		  <div class="column">
+			  <div class="ui olive big fluid label">
+				  Tipo de Id:
+				  <p class="detail">{{ empleado.tipo_id }}</p>
+				</div>
+		  </div>
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Identificación:
+				  <p class="detail">{{ empleado.identificacion }}</p>
+				</div>
+		  </div>
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Cargo:
+				  <p class="detail">{{ empleado.cargo }}</p>
+				</div>
+		  </div>
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Nacimiento:
+				  <p class="detail">{{ empleado.fecha_nacimiento|date }}</p>
+				</div>
+		  </div>
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Empresa:
+				  <p class="detail">{{ empleado.empresa.first_name|title }}</p>
+				</div>
+		  </div>
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Activo:
+				  <p class="detail">{% if empleado.is_active %}Sí{% else %}No{% endif %}</p>
+				</div>
+		  </div>
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Telefono Celular:
+				  <p class="detail">{{ empleado.telefono_celular }}</p>
+				</div>
+		  </div>
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Telefono Fijo:
+				  <p class="detail">{% if empleado.telefono_fijo %}{{ empleado.telefono_fijo }}{% else %}No{% endif %}</p>
+				</div>
+		  </div>
+			<div class="column">
+				<div class="ui olive big fluid label">
+				  Ciudad:
+				  <p class="detail">{{ empleado.ciudad|title }}</p>
+				</div>
+		  </div>
+			<div class="column">
+				<div class="ui olive big fluid label">
+				  Email:
+				  <p class="detail">{{ empleado.email }}</p>
+				</div>
+		  </div>
+			<div class="column">
+				<div class="ui olive big fluid label">
+				  Dirección:
+				  <p class="detail">{{ empleado.direccion|title }}</p>
+				</div>
+		  </div>
+			{% if motorizado %}
+			<div class="column">
+				<div class="ui olive big fluid label">
+				  Licencia:
+				  <p class="detail">{{ motorizado.licencia }}</p>
+				</div>
+		  </div>
+			<div class="column">
+				<div class="ui olive big fluid label">
+				  Moto:
+				  <a class="detail" href="{% url 'domicilios:info_moto' moto.id %}">{{ moto.placa }}</a>
+				</div>
+		  </div>
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Gps Id:
+				  <p class="detail">{{ motorizado.identifier }}</p>
+				</div>
+		  </div>
+			{% endif %}
+			{% if motorizado == 0 and empleado.cargo == 'MOTORIZADO'%}
+				<h2>No hay moto asignada</h2>
+			{% endif %}
+		</div>
+  </div>
+</div>
+{% endblock %}

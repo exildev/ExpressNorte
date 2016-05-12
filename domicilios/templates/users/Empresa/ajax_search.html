@@ -1,0 +1,31 @@
+{% if not empresas %}
+<thead><tr><td>
+
+<h2>No encontramos coincidencias</h2></td></tr></thead>
+{% else %}
+	{% if empresas.count > 0 %}
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Nit</th>
+			<th></th>
+		</tr>
+	</thead>
+		{% for empresa in empresas %}
+			<tr>
+				<td>{{ empresa.first_name }}</td>
+				<td>{{ empresa.nit }}</td>
+				<td class="right aligned">
+					<a href="{% url 'domicilios:info_empresa' empresa.id %}" class="ui icon green"><i class="unhide large green icon"></i></a>
+					<a href="{% url 'domicilios:edit_empresa' empresa.id %}" class="ui green icon"><i class="express-editar green large icon"></i></a>
+					{% if empresa.active == True %}
+						<a href="{% url 'domicilios:status' empresa.id %}" class="ui icon red"><i class="express-denegado large red icon"></i></a>
+					{% else %}
+						<a href="{% url 'domicilios:status' empresa.id %}" class="ui icon green"><i class="checkmark large green icon"></i></a>
+					{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+	{% endif %}
+
+{% endif %}

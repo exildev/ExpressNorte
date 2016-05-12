@@ -1,0 +1,45 @@
+{% extends "users/base_user.html" %}
+{% block title %}Informacion de la Empresa{% endblock %}
+{% block content_user %}
+<div class="one column row">
+	<div class="column">
+		<div class="ui labeled huge input">
+      <a href="{% url 'domicilios:empresa_search' %}" class="ui teal icon huge button">
+        <i class="express-atras icon"></i>
+      </a>
+      <a class="ui olive label">Info Empresa</a>
+    </div>
+	</div>
+</div>
+<div class="ui container grid" style="margin-bottom:50px;">
+  <div class="center aligned column">
+	  <h2 class="ui olive header">{{ empresa.first_name }}</h2>
+	  <div class="ui stackable three column grid">
+			<div class="column">
+				<div class="ui olive big fluid label">
+				  Username:
+				  <a class="detail">{{ empresa.username }}</a>
+				</div>
+			</div>
+		  <div class="column">
+				<div class="ui olive big fluid label">
+				  Nit:
+				  <a class="detail">{{ empresa.nit }}</a>
+				</div>
+			</div>
+			<div class="column">
+				<div class="ui olive big fluid label">
+				  Web:
+				  <a href="{{ empresa.web }}" class="detail">{{ empresa.web }}</a>
+				</div>
+			</div>
+			<div class="column">
+				<div class="">
+					<img class="ui fluid image" src="{{MEDIA_URL}}{{empresa.logo}}">
+				</div>
+		  </div>
+		</div>
+  </div>
+</div>
+</div>
+{% endblock %}

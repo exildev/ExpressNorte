@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block addcss %}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css">
+ 
+  {% block addcss_user %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+  <div class="ui grid">
+    {% block content_user %}
+
+    {% endblock %}
+    {% include "users/header_user.html" %}
+  </div>
+{% endblock %}

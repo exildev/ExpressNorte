@@ -1,0 +1,19 @@
+{% extends "users/base_user.html" %}
+{% block title %}Rastreo{% endblock %}
+{% block content_user %}
+<div class="one column row">
+  <div class="column">
+    <div class="ui labeled huge input">
+      <a href="{% url 'domicilios:index' %}" class="ui teal icon huge button">
+        <i class="express-atras icon"></i>
+      </a>
+      <a class="ui olive label">Rastreo</a>
+    </div>
+  </div>
+</div>
+<div class="ui container grid" style="margin-bottom:50px;margin-top:15px;">
+  <div class="embed-container">
+    <iframe id ="contenedor" name="cont" width="500" height="315" src="http://plataforma.expressdelnorte.com.co:8070/" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+{% endblock %}

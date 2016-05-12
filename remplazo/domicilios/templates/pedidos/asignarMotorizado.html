@@ -1,0 +1,61 @@
+{% extends "users/base_user.html" %}
+{% block title %}Asignar Motorizado{% endblock %}
+{% block content_user %}
+<div class="one column row">
+	<div class="column">
+		<div class="ui labeled huge input">
+			<a href="{% url 'domicilios:index' %}" class="ui teal icon huge button">
+			<i class="express-atras icon"></i>
+			</a>
+			<a class="ui olive label">Asignar Motorizado</a>
+		</div>
+	</div>
+	{% if mensaje %}
+      <div class="ui center aligned container row">
+        <div class="ui {{ mensaje.tipo }} message">
+          <div class=" content">
+            <div class="header">
+              {{ mensaje.texto }}
+            </div>
+          </div>
+        </div>
+      </div>
+   {% endif %}
+</div>
+
+<div class="ui container grid" style="margin-bottom:50px;">
+  <div class="center aligned column">
+		{% if pedido %}
+		<h2 class="ui olive header">Pedidos Para Asignar</h2>
+		<div class="column row">
+			<div class="column">
+				<table class="ui very basic striped unstackable table">
+					<thead>
+						<tr>
+							<th>Codigo Express</th>
+							<th>Numero de Pedido</th>
+							<th>Supervisor</th>
+							<th>Fecha el Pedido</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for x in pedido %}
+							<tr>
+								<td>{{ x.npedido_express }}</td>
+								<td>{{ x.num_pedido }}</td>
+								<td>{{ x.supervisor.first_name }} {{ x.supervisor.last_name }}</td>
+								<td>{{ x.fecha_pedido }}</td>
+								<td><a href="{% url 'domicilios:choose' x.id %}" class="ui icon blue small button">Asignar</a></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		{% else %}
+		<h2 class="ui olive header">No hay pedidos que asignar</h2>
+		{% endif %}
+  </div>
+</div>
+{% endblock %}

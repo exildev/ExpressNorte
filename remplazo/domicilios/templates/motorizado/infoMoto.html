@@ -1,0 +1,96 @@
+{% extends "users/base_user.html" %}
+{% block title %}Informacion de la Moto{% endblock %}
+{% block content_user %}
+<div class="one column row">
+	<div class="column">
+		<div class="ui labeled huge input">
+      <a href="{% url 'domicilios:moto_search' %}" class="ui teal icon huge button">
+        <i class="express-atras icon"></i>
+      </a>
+      <a class="ui olive label">Info Moto</a>
+    </div>
+	</div>
+</div>
+
+<div class="ui container grid" style="margin-bottom:50px;">
+	<div class="center aligned column">
+		<h2 class="ui teal header">Descripción General</h2>
+		<div class="ui stackable two column grid">
+			<div class="column">
+				<div class="ui olive big fluid label">
+				  Placa:
+				  <a class="detail">{{ moto.placa }}</a>
+				</div>
+		  	</div>
+		  	<div class="column">
+				<div class="ui olive big fluid label">
+				  Tarjeta de Propieda:
+				  <a class="detail">{{ moto.t_propiedad }}</a>
+				</div>
+		  	</div>
+		</div>
+		<div class="ui stackable three column grid">
+			<div class="column">
+			  	<div class="ui olive big fluid label">
+				  Tipo:
+				  <a class="detail">{{ moto.tipo }}</a>
+				</div>
+		  	</div>
+		  	<div class="column">
+				<div class="ui olive big fluid label">
+				  Marca:
+				  <a class="detail">{{ moto.marca }}</a>
+				</div>
+		  	</div>
+		  	<div class="column">
+				<div class="ui olive big fluid label">
+				  Empresa:
+				  <a class="detail">{{ moto.empresaM }}</a>
+				</div>
+		  	</div>
+		</div>
+		<h2 class="ui teal header">Soat</h2>
+		<div class="ui stackable three column grid">
+			<div class="column">
+				<div class="ui olive big fluid label">
+					Numero:
+					<a href="detail">{{ soat.numeroS }}</a>
+				</div>
+			</div>
+			<div class="column">
+				<div class=" ui olive big fluid label">
+					Fecha de Expedicion:
+					<a href="detail">{{ soat.fecha_expedicionS|date }}</a>
+				</div>
+			</div>
+			<div class="column">
+				<div class=" ui olive big fluid label">
+					Fecha de Expiracion:
+					<a href="detail">{{ soat.fecha_expiracionS|date }}</a>
+				</div>
+			</div>
+		</div>
+		<h2 class="ui teal header">Tecnico-Mecanica</h2>
+		<div class="ui stackable three column grid">
+			<div class="column">
+				<div class="ui olive big fluid label">
+					Numero:
+					<a href="detail">{{ tecno.numeroT }}</a>
+				</div>
+			</div>
+			<div class="column">
+				<div class=" ui olive big fluid label">
+					Fecha de Expedicion:
+					<a href="detail">{{ tecno.fecha_expedicionT|date }}</a>
+				</div>
+			</div>
+			<div class="column">
+				<div class=" ui olive big fluid label">
+					Fecha de Expiracion:
+					<a href="detail">{{ tecno.fecha_expiracionT|date }}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

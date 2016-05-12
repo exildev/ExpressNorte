@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>getUserMedia</title>
+        <style type="text/css">
+        body {
+    font-family: "Verdana";
+    font-size: 9pt;
+}
+
+header {
+    padding: 15px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.4);
+    background-color: rgb(27, 161, 226);
+    color: #fff;
+}
+
+    header h1 {
+        font-size: 14pt;
+    }
+
+
+article {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+        </style>
+        <script type="text/javascript">
+        var canvas
+            ,context 
+            ,video
+            ,btnStart
+            ,btnStop
+            ,btnPhoto
+            ,videoObj,localMediaStream;
+        function init(){
+             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+            video = document.getElementById("video");
+            btnStart = document.getElementById("btnStart");
+            btnStop = document.getElementById("btnStop"),
+            btnPhoto = document.getElementById("btnPhoto");
+            videoObj = {
+                video: true,
+                audio: true
+            };
+        }
+
+        function producir(){
+            btnStart.addEventListener("click", function() {
+                 if (navigator.getUserMedia) {
+                    /*console.log("entro");
+                    navigator.getUserMedia(videoObj, function(stream) {              
+                        /*video.src = (navigator.webkitGetUserMedia) ? window.webkitURL.createObjectURL(stream) : stream;
+                        localMediaStream = stream;*/
+                        alert("jajja");
+                    /*}, function(error) {
+                        console.error("Video capture error: ", error.code);
+
+                    });*/
+                    navigator.getUserMedia(
+                {
+                    video:true,
+                    audio:false
+                },      
+                function(stream) {
+                    // Cross browser checks
+                    var url = window.URL || window.webkitURL;
+                    v.src = url ? url.createObjectURL(stream) : stream;
+                    // Set the video to play
+                    v.play();
+                    console.log("llego");
+                },
+                function(error) {
+                    alert('Something went wrong. (error code ' + error.code + ')');
+                    return;
+                }
+            );
+                    /*btnStop.addEventListener("click", function() {
+                        localMediaStream.stop();
+                    });
+
+                    btnPhoto.addEventListener("click", function() {
+                        context.drawImage(video, 0, 0, 320, 240);
+
+                    });*/
+                }
+            });
+        }
+        window.onload = init;
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>getUserMedia</h1>
+        </header>
+        <article>
+            <video  id="video" width="320" height="200" autoplay></video>
+            <section>
+                <button id="btnStart">Start video</button>
+                <button id="btnStop">Stop video</button>            
+                <button id="btnPhoto">Take a photo</button>
+            </section>
+            <canvas id="canvas" width="320" height="240"></canvas>
+        </article>
+    </body>
+</html>

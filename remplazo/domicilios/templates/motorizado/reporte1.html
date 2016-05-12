@@ -1,0 +1,55 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block layout_style %}
+    <style type="text/css">
+        @page {
+            size: {{ pagesize|default:"A4" }};
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-top: 2cm;
+            margin-bottom: 1cm;
+          }
+    </style>
+{% endblock %}
+
+{% block extra_style %}
+    <style type="text/css">
+        @font-face { font-family: Lato; src: url(fonts/Lato-Bol.ttf); font-weight: bold; }
+        @font-face { font-family: Lato; src: url(fonts/Lato-Reg.ttf); }
+        @font-face { font-family: "Lato Light"; src: url(fonts/Lato-Lig.ttf); }
+        td{
+          font-weight: normal;
+          padding: 0.5em;
+        }
+        .text-right{text-align: right;}
+        .text-left{text-align: left;}
+    </style>
+{% endblock %}
+
+
+{% block content %}
+<strong>Reporte de Pedidos por Ciudad</strong>
+<br>
+Ciudad: {{ciudad}}
+<hr>
+<br>
+<table>
+  <tr>
+    <td><strong>Numero de Pedido</strong></td>
+    <td><strong>Motorizado</strong></td>
+    <td><strong>Fecha de Pedido<strong></td>
+    <td><strong>Fecha de Asignacion</strong></td>
+    <strong><td><strong>Fecha de Entrega</strong></td></strong>
+  </tr>
+  {% for p in pedidos %}
+  <tr>
+    <td>{{p.npedido_express}}</td>
+    <td>{{p.motorizado.identificacion}}</td>
+    <td>{{p.fecha_pedido}}</td>
+    <td>{{p.Entregado.tiempo_asignacion}}</td>
+    <td>{{p.Entregado.tiempo_entrego}}</td>
+  </tr>
+
+  {% endfor %}
+</table>
+{% endblock %}

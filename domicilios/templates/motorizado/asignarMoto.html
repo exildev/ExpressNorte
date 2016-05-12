@@ -1,0 +1,55 @@
+{% extends "users/base_user.html" %}
+{% block title %}Asignar Moto{% endblock %}
+{% block content_user %}
+<div class="one column row">
+	<div class="column">
+		<div class="ui labeled huge input">
+      <a href="{% url 'domicilios:index_motorizado' %}" class="ui teal icon huge button">
+        <i class="express-atras icon"></i>
+      </a>
+      <a class="ui olive label">Asignar Moto</a>
+    </div>
+	</div>
+</div>
+<div class="ui container grid" style="margin-bottom:50px;">
+  <div class="center aligned column">
+	  {% if error %}
+			<h1 class="ui header">{{ error }}</h1>
+		{% else %}
+		<form method="POST" class="ui form">
+			{% csrf_token %}
+			<h2 class="ui teal header">&nbsp;</h2>
+	    <div class="four fields">
+				<div class="field {% if form.empleado.errors %}error{% endif %}">
+					{{ form.empleado }}
+				</div>
+				<div class="field {% if form.licencia.errors %}error{% endif %}">
+		      {{ form.licencia }}
+		    </div>
+				<div class="field {% if form.identifier.errors %}error{% endif %}">
+					{{ form.identifier }}
+				</div>
+				<div class="field {% if form.moto.errors %}error{% endif %}">
+					{{ form.moto }}
+				</div>
+	    </div>
+
+			<button type="submit" class="ui olive fluid large button">Registrar</button>
+
+		</form>
+		{% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block addjs %}
+<script type="text/javascript">
+$( document ).ready(function() {
+	var Empleado = document.getElementById('id_empleado');
+	var Moto = document.getElementById('id_moto');	
+	Empleado.options[0].innerHTML = "Empleado";
+	Moto.options[0].innerHTML = "Placa";
+	$('.ui.dropdown').dropdown();
+});
+</script>
+{% endblock %}
