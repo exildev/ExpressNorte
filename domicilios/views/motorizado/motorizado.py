@@ -224,3 +224,7 @@ class reporte2(PDFTemplateView):
             pedidos=pedidos, Moto=Moto,
             **kwargs
         )
+    #end def
+#end class
+
+

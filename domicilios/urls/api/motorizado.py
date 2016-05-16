@@ -28,4 +28,9 @@ urlpatterns += patterns('domicilios.views.api.motorizado.motorizado',
 	url(r'^search/reporte/$','searchreporte',name="searchreporte"),
 )
 
+#servicios para la realizacion del rastreo
+
+urlpatterns += patterns('domicilios.views.api.motorizado.motorizado',
+	url(r'^rastreo/$','rastre_motorizado',name='rastre_motorizado_vista'),
+)
 

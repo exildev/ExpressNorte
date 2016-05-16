@@ -262,3 +262,7 @@ def searchreporte(request):
 #end def
 
 
+def rastre_motorizado(request):
+    return render(request,'api/motorizado/rastreo.html')
+#en def
+

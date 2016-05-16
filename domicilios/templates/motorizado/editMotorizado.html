@@ -18,6 +18,12 @@
   <div class="center aligned column">
 		<form method="POST" class="ui form">
 			{% csrf_token %}
+			<h2 class="ui header"></h2>
+	      <div class="field">
+	        <textarea cols="40" id="id_observacion" maxlength="200" name="observacion" placeholder="Observaciones" rows="4"></textarea>
+	      </div>
+			<h2 class="ui header"></h2>
+			<button type="submit" class="ui blue fluid large button">Siguiente</button>
 			<h2 class="ui teal header">Descripción General</h2>
 		    <div class="four fields">
 					<div class="field {% if form.empleado.errors %}error{% endif %}">
