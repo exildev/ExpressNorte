@@ -14,14 +14,50 @@
 <div class="ui container grid" style="margin-bottom:50px;margin-top:15px;">
   <div class="center aligned column">
     <div class="ui stackable two column grid">
-      <div class="embed-container">
-        <div class="c"></div>
-        <div class="c"></div>
-      </div>
+        <div class="c lista">
+          
+          <input type="text" name="search" placeholder="Search..">
+        </div>
+        <div class="c mapa"></div>
     </div>
   </div>
 </div>
 {% endblock %}
 {% block addjs %}
-  
-{% endblock}
+  <style type="text/css">
+    .c{
+      width: 100px;
+      height: 500px;
+      border-style: solid;
+      border-width: 2px;
+    }
+
+    .lista{
+      width: 200px;
+    }
+
+    .mapa{
+      width: 900px;
+    }
+
+    input[type=text] {
+        width: 130px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('/static/img/searchicon.png');
+        background-position: 10px 10px; 
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+
+    input[type=text]:focus {
+        width: 100%;
+    }
+
+  </style>
+{% endblock %}
