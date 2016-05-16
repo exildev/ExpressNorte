@@ -1,5 +1,6 @@
 from django.db import models
-from users import Cliente, Empleado, Empresa
+from users import Cliente, Empleado, Empresa,ClienteWs
+
 
 class Items(models.Model):
 	PRESENTACION = (
@@ -21,13 +22,14 @@ class Items(models.Model):
 	def __str__(self):
 		return self.codigo + " - " + self.descripcion
 
-class Pedido(models.Model):
 
-	TIPO_PAGO = (
+TIPO_PAGO = (
 		('EFECTIVO', 'Efectivo'),
 		('TARJETA', 'Tarjeta'),
 		('REMISION', 'Remision')
 	)
+
+class Pedido(models.Model):
 
 	num_pedido = models.CharField(max_length=50)
 	npedido_express = models.CharField(max_length=50, unique=True)
@@ -98,3 +100,38 @@ class Certificado(models.Model):
 	pedidoC = models.ForeignKey(Pedido)
 	clienteC = models.ForeignKey(Cliente)
 	cedulaC = models.ImageField(upload_to='cedulas/')
+
+
+class PedidoWS(models.Model):
+	num_pedido = models.CharField(max_length=50)
+	npedido_express = models.CharField(max_length=50, unique=True)
+	fecha_pedido = models.DateField(auto_now=True)
+	tienda = models.CharField(max_length=50, blank=True, null=True)
+	cliente = models.ForeignKey(ClienteWs, null=True)
+	supervisor = models.ForeignKey(Empleado, related_name='supervisorws', null=True)
+	alistador = models.ForeignKey(Empleado, related_name='alistadorws', null=True)
+	motorizado = models.ForeignKey(Empleado, related_name='motorizado_enviadows', null=True)
+	tipo_pago = models.CharField(max_length=50, choices=TIPO_PAGO,default='EFECTIVO')
+	observacion = models.TextField(max_length=200,null=True,blank=True)
+	empresa = models.ForeignKey(Empresa,blank=True, null=True)
+	total = models.DecimalField(max_digits=20,decimal_places=2, null=True)
+	entregado = models.BooleanField(default=False)
+	despachado = models.BooleanField(default=False)
+	confirmado = models.BooleanField(default=False)
+	alistado = models.BooleanField(default=False)
+
+	class Meta:
+	    verbose_name = "Pedido"
+	    verbose_name_plural = "Pedidos"
+
+	def __str__(self):
+		return self.npedido_express
+
+
+class TimeWS(models.Model):
+	creado = models.DateTimeField()
+	confirmado = models.DateTimeField(null=True)
+	alistado = models.DateTimeField(null=True)
+	despachado = models.DateTimeField(null=True)
+	entregado = models.DateTimeField(null=True)
+	pedido = models.OneToOneField(PedidoWS)
