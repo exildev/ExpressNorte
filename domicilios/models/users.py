@@ -1054,6 +1054,18 @@ class Cliente (models.Model):
 		verbose_name = "Cliente"
 		verbose_name_plural = "Clientes"
 
+class ClienteWs(models.Model):
+	nombre = models.CharField(max_length=50)
+	identificacion = models.CharField(max_length=15, unique=True, validators=[validators.RegexValidator(re.compile('^[0-9]+$'), ('identificacion no valida'), 'invalid')])
+	telefono_fijo = models.CharField(max_length=15, blank=True, validators=[validators.RegexValidator(re.compile('^[0-9]+$'), ('telefono no valido'), 'invalid')])
+	telefono_celular = models.CharField(max_length=15, blank=True, validators=[validators.RegexValidator(re.compile('^[0-9]+$'), ('telefono no valido'), 'invalid')])
+	direccion = models.CharField(max_length=50)
+
+	def __str__(self):
+		str = self.identificacion
+		return str
+	#end def
+#end class
 
 class Empleado(Usuario):
 	CARGOS = (
