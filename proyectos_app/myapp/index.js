@@ -29,6 +29,11 @@ io.on('connection', function(socket) {
 		});
   	}
   });
+  socket.on('hola',function(data){
+    console.log(data);
+    console.log(data.web_id+"  "+socket.id);
+    io.to(socket.id).emit('respuesta', {id_gps:'7845652456'});
+  });
 });
 
 
