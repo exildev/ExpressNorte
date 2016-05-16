@@ -62,7 +62,7 @@
       {% endif %}
       {% if request.session.cargo == 'SUPERVISOR' or request.session.cargo == 'ADMINISTRADOR' %}
         <div class="ui vertical compact labeled icon inverted teal huge menu">
-          <a href="{% url 'domicilios:rastreo' %}" class="item">
+          <a href="{% url 'domicilios:rastre_motorizado_vista' %}" class="item">
             <h3><i class="marker huge icon"></i></h3>
             Rastreo
           </a>
