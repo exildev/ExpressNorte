@@ -1,0 +1,27 @@
+{% extends "users/base_user.html" %}
+{% block title %}Rastreo{% endblock %}
+{% block content_user %}
+<div class="one column row">
+  <div class="column">
+    <div class="ui labeled huge input">
+      <a href="{% url 'domicilios:index' %}" class="ui teal icon huge button">
+        <i class="express-atras icon"></i>
+      </a>
+      <a class="ui olive label">Rastreo</a>
+    </div>
+  </div>
+</div>
+<div class="ui container grid" style="margin-bottom:50px;margin-top:15px;">
+  <div class="center aligned column">
+    <div class="ui stackable two column grid">
+      <div class="embed-container">
+        <div class="c"></div>
+        <div class="c"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block addjs %}
+  
+{% endblock}

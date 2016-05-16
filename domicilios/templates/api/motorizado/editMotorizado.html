@@ -18,6 +18,10 @@
   <div class="center aligned column">
 		<form method="POST" class="ui form">
 			{% csrf_token %}
+				<h2 class="ui header"></h2>
+	      <div class="field">
+	        <div id="qr" style="height:100px;width=100px;border: 3px solid #73AD21;"></div>
+	      </div>
 			<h2 class="ui teal header">Descripción General</h2>
 		    <div class="four fields">
 					<div class="field {% if form.empleado.errors %}error{% endif %}">
@@ -50,5 +54,20 @@
 	$( document ).ready(function() {
 		$('.ui.dropdown').dropdown();
 	});
+</script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}api/js/jquery.qrcode.js"></script>
+<script type="text/javascript">
+	$("#qr").qrcode({
+	    "size": 100,
+	    "color": "#000",
+	    "text": '123456'
+	});
+	var socket = io('http://127.0.0.1:3000');
+  	socket.emit('hola', {'web_id': '123456', 'cell_id': 'Hola mundo'});
+  	socket.on('respuesta',function(data){
+  		console.log(data);
+  		$('#id_identifier').val(data.id_gps);
+  	});
 </script>
 {% endblock %}
