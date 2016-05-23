@@ -1029,14 +1029,15 @@ class Empresa(models.Model):
 
 class Tienda(models.Model):
 	empresa = models.ForeignKey(Empresa)
+	nit = models.CharField(max_length=50,unique=True)
 	nombre = models.CharField(max_length=200)
 	direccion = models.CharField(max_length=500)
-	fijo = models.CharField(max_length=10, verbose_name="Telefono Fijo")
-	celular = models.CharField(max_length=10, verbose_name="Telefono Celular")
+	fijo = models.CharField(max_length=10, verbose_name="Telefono Fijo",null=True,blank=True)
+	celular = models.CharField(max_length=10, verbose_name="Telefono Celular",null=True,blank=True)
 	latitud = models.FloatField()
 	longitud = models.FloatField()
 
-	def __init__(self):
+	def __str__(self):
 		return self.nombre
 	#end def
 #end class
