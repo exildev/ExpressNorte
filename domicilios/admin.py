@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
-from .models.users import Cliente, Empleado, Empresa
+from .models.users import Cliente, Empleado, Empresa,Tienda
 from .models.motorizado import Moto, Soat, Tecno, Motorizado
 from .models.pedido import Pedido, Items, Tiempo, ItemsPedido,Tiempo
 from django.contrib.auth.forms import UserCreationForm
 from domicilios.forms.users.clienteForm import *
-from domicilios.forms.users.empleadoForm import * 
+from domicilios.forms.users.empleadoForm import *
 # Register your models here.
 
 #Administracion de Cliente
@@ -16,7 +16,7 @@ class ClienteAdmin(admin.ModelAdmin):
     ]
     list_display = ('first_name',)
 
-    
+
 
 admin.site.register(Cliente, ClienteAdmin)
 
@@ -91,6 +91,7 @@ class PedidoAdmin(admin.ModelAdmin):
 
 admin.site.register(Pedido, PedidoAdmin)
 admin.site.register(Tiempo)
+admin.site.register(Tienda)
 
 #Administracion de User y Group
 #admin.site.unregister(User)
