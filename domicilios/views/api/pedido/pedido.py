@@ -195,7 +195,7 @@ def pedidoItems(request):
     formItems = AddItemsPedidoForm()
     formItems.fields["item"].queryset = Items.objects.filter(empresaI=userEmpresa(request,2))
     return render(request, 'api/pedidos/pedidoItems.html', {'pedido': pedido, 'form': formItems, 'total': total})
-    
+
 def addItemPedido(request):
     if request.method == 'POST':
         form = AddItemsApiForm(request.POST)
@@ -230,11 +230,11 @@ def totalPedido(request):
                             formA = AddPedidoAdminApiForm()
                             mensaje = {'tipo':'success', 'texto': 'El pedido a sido guardado exitosamente'}
                             if p[0].motorizado:
-                                return HttpResponseRedirect('/plataforma/pedido/') 
+                                return HttpResponseRedirect('/plataforma/pedido/')
                                 return render(request, 'api/pedidos/addPedidoAdmin.html', {'formC': formC, 'formP': formA, 'mensaje':mensaje})
                             else:
                                 #return render(request, 'api/pedidos/addPedido.html', {'formC': formC, 'formP': formP, 'mensaje':mensaje})
-                                return HttpResponseRedirect('/plataforma/pedido/')    
+                                return HttpResponseRedirect('/plataforma/pedido/')
                         #end if
                     else:
                         formItems = AddItemsPedidoForm()
@@ -246,7 +246,7 @@ def totalPedido(request):
             #end if
         #end if
     #end if
-    return HttpResponseRedirect('/plataforma/pedido/')  
+    return HttpResponseRedirect('/plataforma/pedido/')
 
 def deletePedidoItems(request, item_id):
     item = ItemsPedido.objects.filter(id=item_id)
@@ -404,7 +404,7 @@ def deletePedidoItemsEdit(request, item_id):
         item.delete()
         return HttpResponseRedirect('/plataforma/pedido/%s/edit/items/' % item.pedido.id)
     #end def
-    return redirect(reverse('domicilios:api_add_pedido_items')) 
+    return redirect(reverse('domicilios:api_add_pedido_items'))
 
 def totalPedidoEdit(request):
     if request.method == 'POST':
@@ -543,4 +543,9 @@ def wsPedidoEmpresa(request):
     cursor.execute('select ws_add_pedido_service(\'%s\'::json)'%request.body.decode('utf-8'))
     row = cursor.fetchone()
     return HttpResponse(row[0],content_type="application/json")
+#end def
+
+@csrf_exempt
+def wsNotificacion(request):
+    return HttpResponse('',content_type="application/json")
 #end def
