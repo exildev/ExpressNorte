@@ -266,3 +266,16 @@ def rastre_motorizado(request):
     return render(request,'api/motorizado/rastreo.html')
 #en def
 
+
+@csrf_exempt
+def listar_motorizado_rastreo(request):
+    print request.POST
+    busq = request.POST.get('busq','')
+    start = request.POST.get('start','0')
+    pag = request.POST.get('pag','10')
+    cursor = connection.cursor()
+    #cursor.execute('select listar_motorizados_rastreo(%d,\'jajajaj\'::text,%s::integer,%s::integer)'%(request.user.id,busq,start,pag))
+    cursor.execute('select ws_rastreo_lis_motorizado(5,\'jajajaj\'::text,1,10)')
+    row = cursor.fetchone()
+    return HttpResponse(row[0],content_type="application/json")
+#end def

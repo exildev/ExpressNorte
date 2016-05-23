@@ -13,6 +13,7 @@ from decimal import Decimal
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
 from django.core.exceptions import PermissionDenied
+import json
 
 def userEmpresa(request, num):
     user = Empleado.objects.get(username=request.user)
@@ -519,4 +520,27 @@ def updatePedidoEntregaMotService(request):
 
 def foto(request):
     return render(request,'api/pedidos/foto.html')
+#end def
+
+
+@csrf_exempt
+def wsPedidoEmpresa(request):
+    #print   (request.body.decode('utf-8')),request.body, 'jajajja' if request.body else 'nooo'
+    #print 'correcto' if request.body.decode('utf-8') != 'undefined=' else 'mala'
+    #print request.body.decode('utf-8')
+    #print json.loads((request.body.decode('utf-8')))
+    """
+    for x in json.loads((request.body.decode('utf-8'))):
+        print x
+        print x['total_pedido']
+        print x['tienda']['identificador']
+        print x['cliente']
+        print x['descripcion_pedido']
+    """
+    #end for
+    print request.body.decode('utf-8')
+    cursor = connection.cursor()
+    cursor.execute('select ws_add_pedido_service(\'%s\'::json)'%request.body.decode('utf-8'))
+    row = cursor.fetchone()
+    return HttpResponse(row[0],content_type="application/json")
 #end def

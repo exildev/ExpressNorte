@@ -32,5 +32,6 @@ urlpatterns += patterns('domicilios.views.api.motorizado.motorizado',
 
 urlpatterns += patterns('domicilios.views.api.motorizado.motorizado',
 	url(r'^rastreo/$','rastre_motorizado',name='rastre_motorizado_vista'),
+	url(r'^listar/rastreo/$','listar_motorizado_rastreo',name='listar_motorizado_rastreo'),
 )
 

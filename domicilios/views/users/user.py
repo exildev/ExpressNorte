@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth.views import login, logout
 from domicilios.forms.users.userForm import LoginForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from django.core.urlresolvers import reverse
 from domicilios.decorators import *
 from domicilios.models.users import Empleado
@@ -41,3 +42,25 @@ def index(request):
 @motorizado_required
 def rastreo(request):
     return render(request,'users/User/rastreo.html')
+
+def ws_loguin(request):
+    username = request.POST.get('user',False)
+    password = request.POST.get('password',False)
+    if username and password :
+        usuario = authenticate(username=username, password=password)
+        if usuario :
+            if usuario is not None:
+                if usuario.is_active:
+                    print 'si'
+                    login(request, usuario)
+                    return HttpResponse('true',content_type="application/json",status=200)
+                else:
+                    mensaje = "Usuario desactivado"
+                #end if
+            else:
+                mensaje = "Usuario y/o Contraseña incorrectos"
+            #end if
+        #end if
+    #end if
+    return HttpResponse(mensaje,content_type="application/json",status=401)
+#end def

@@ -14,9 +14,92 @@
 <div class="ui container grid" style="margin-bottom:50px;margin-top:15px;">
   <div class="center aligned column">
     <div class="ui stackable two column grid">
-        <div class="c lista">
-          
-          <input type="text" name="search" placeholder="Search..">
+        <div class="c lista">          
+          <input type="text" name="search" placeholder="Search.." id="search">
+            <div class="contenedor">
+              <ul class="lis_emp">
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+                <li name="empleado">Un empleado
+                  <ul>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <li>un atributoo</li>
+                    <input type="radio" name="selec">
+                  </ul>
+                </li>
+              </ul>
+            </div>
         </div>
         <div class="c mapa"></div>
     </div>
@@ -24,6 +107,8 @@
 </div>
 {% endblock %}
 {% block addjs %}
+<script type="text/javascript" src="{{ STATIC_URL }}api/js/json2.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}api/js/listar_motorizado_rastreo.js"></script>
   <style type="text/css">
     .c{
       width: 100px;
@@ -41,9 +126,9 @@
     }
 
     input[type=text] {
-        width: 130px;
+        width: 180px;
         box-sizing: border-box;
-        border: 2px solid #ccc;
+        border: 2px solid black;
         border-radius: 4px;
         font-size: 16px;
         background-color: white;
@@ -58,6 +143,23 @@
     input[type=text]:focus {
         width: 100%;
     }
+
+    div.c.lista{
+      padding-left: -6px;
+      padding-right: 0px;
+    }
+
+    .contenedor{
+      height: 90%;
+      overflow-y: scroll;
+    }
+
+    ul{  
+      margin:0;  
+      padding:0;  
+      display:block;
+      list-style-type:none;  
+      } 
 
   </style>
 {% endblock %}

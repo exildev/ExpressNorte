@@ -44,3 +44,10 @@ urlpatterns +=patterns('domicilios.views.api.pedido.pedido',
 urlpatterns += patterns('domicilios.views.api.pedido.pedido',
 	url(r'^foto/$','foto', name="foto"),
 )
+
+#domicilios Web
+urlpatterns += patterns('domicilios.views.api.pedido.pedido',
+    url(r'^ws/pedido/rest/$','wsPedidoEmpresa', name="wsPedidoEmpresa"),#Servicio que recibe los pedidos
+	url(r'^ws/notificaciones/$','wsNotificacion',name="wsNotificacion"),
+
+)
