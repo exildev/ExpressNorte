@@ -1024,6 +1024,22 @@ class Empresa(models.Model):
 	class Meta:
 		verbose_name = "Empresa"
 		verbose_name_plural = "Empresas"
+#end class
+
+
+class Tienda(models.Model):
+	empresa = models.ForeignKey(Empresa)
+	nombre = models.CharField(max_length=200)
+	direccion = models.CharField(max_length=500)
+	fijo = models.CharField(max_length=10, verbose_name="Telefono Fijo")
+	celular = models.CharField(max_length=10, verbose_name="Telefono Celular")
+	latitud = models.FloatField()
+	longitud = models.FloatField()
+
+	def __init__(self):
+		return self.nombre
+	#end def
+#end class
 
 
 class Cliente (models.Model):
