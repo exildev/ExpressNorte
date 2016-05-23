@@ -29,6 +29,7 @@ TIPO_PAGO = (
         ('REMISION',  'Remision')
     )
 
+
 class Pedido(models.Model):
 
     num_pedido = models.CharField(max_length=50)
@@ -60,6 +61,7 @@ class Pedido(models.Model):
         tiempos = Tiempo.objects.get(pedido=pedido)
         return tiempos
 
+
 class ItemsPedido(models.Model):
     pedido = models.ForeignKey(Pedido)
     item = models.ForeignKey(Items)
@@ -70,7 +72,6 @@ class ItemsPedido(models.Model):
     class Meta:
         verbose_name = "Item Pedido"
         verbose_name_plural = "Items Pedido"
-
 
 
 class Tiempo(models.Model):
