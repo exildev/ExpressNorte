@@ -36,7 +36,7 @@
 					<div class="field {% if form.moto.errors %}error{% endif %}">
 						{{ form.moto }}
 					</div>
-					
+
 		    </div>
 
 			<button type="submit" class="ui olive fluid large button">Actualizar</button>
@@ -44,12 +44,15 @@
 		</form>
   </div>
 </div>
+<input type="hidden" id="empresa" value="{{ empresa }}">
+<input type="hidden" id="motorizado" value="{{ motorizado }}">
 {% endblock %}
 
 {% block addjs %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.plugin.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.datepick.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.datepick-es.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}api/js/md5.js">
 <script type="text/javascript">
 	$( document ).ready(function() {
 		$('.ui.dropdown').dropdown();
@@ -61,11 +64,12 @@
 	$("#qr").qrcode({
 	    "size": 100,
 	    "color": "#000",
-	    "text": '123456'
+	    "text": calcMD5($('#empresa').val())
 	});
 	var socket = io('http://127.0.0.1:3000');
-  	socket.emit('hola', {'web_id': '123456', 'cell_id': 'Hola mundo'});
-  	socket.on('respuesta',function(data){
+		socket.emit('identificar_emp',{'web_id':calcMD5($('#empresa').val()),'motorizado':$('#motorizado').val()})
+  	//socket.emit('hola', {'web_id': '123456', 'cell_id': 'Hola mundo'});
+  	socket.on('resp_identificacion',function(data){
   		console.log(data);
   		$('#id_identifier').val(data.id_gps);
   	});

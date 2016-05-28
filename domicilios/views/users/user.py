@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from domicilios.decorators import *
 from domicilios.models.users import Empleado
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 def custom_login(request, **kwargs):
     print 'llegohasta aqui'
@@ -29,7 +30,7 @@ def index(request):
     empleado = Empleado.objects.filter(pk=userid).first()
     if not empleado :
         return redirect_to_login(next=request.get_full_path(), login_url=settings.LOGIN_URL)
-    #end if 
+    #end if
     cargo = empleado.cargo
     empresa = empleado.empresa.first_name
     request.session["cargo"] = cargo
@@ -38,11 +39,13 @@ def index(request):
         raise PermissionDenied
     else:
         return render(request,'api/users/User/index.html')
-    
+
 @motorizado_required
 def rastreo(request):
     return render(request,'users/User/rastreo.html')
 
+    
+@csrf_exempt
 def ws_loguin(request):
     username = request.POST.get('user',False)
     password = request.POST.get('password',False)

@@ -183,8 +183,10 @@ def editMotorizado(request,motorizado_id):
             mensaje = {'tipo':'success','texto':"Se a editado un motorizado correctamente"}
             return render(request, 'api/motorizado/motorizado.html', {'mensaje':mensaje,'motorizados':motorizados})
     else:
+        emp = Empresa.objects.filter(empleado__id=request.user.id).values('first_name').first()
+        emp = emp['first_name'] if emp else False
         formMotorizado = editMotorizadoForm(instance=motorizado)
-    return render(request,'api/motorizado/editMotorizado.html',{'form':formMotorizado})
+    return render(request,'api/motorizado/editMotorizado.html',{'form':formMotorizado,'empresa':emp,'motorizado':motorizado_id})
 
 def motorizadoResults(request):
     empresa = userEmpresa(request,2)
@@ -263,7 +265,9 @@ def searchreporte(request):
 
 
 def rastre_motorizado(request):
-    return render(request,'api/motorizado/rastreo.html')
+    emp = Empresa.objects.filter(empleado__id=request.user.id).values('first_name').first()
+    emp = emp['first_name'] if emp else False
+    return render(request,'api/motorizado/rastreo.html',{'empresa':emp})
 #en def
 
 

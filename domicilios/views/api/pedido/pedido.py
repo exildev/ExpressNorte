@@ -547,5 +547,8 @@ def wsPedidoEmpresa(request):
 
 @csrf_exempt
 def wsNotificacion(request):
-    return HttpResponse('',content_type="application/json")
+    cursor = connection.cursor()
+    cursor.execute('select ws_notif_pedidos(\'%s\'::integer)'%request.user.id)
+    row = cursor.fetchone()
+    return HttpResponse(row[0],content_type="application/json")
 #end def
